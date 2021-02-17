@@ -1,9 +1,12 @@
-import { StatusBar } from 'expo-status-bar';
+import Expo from 'expo';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import Ball from './src/Ball'
-import Deck from './src/Deck'
-import {Card, Button, Image} from 'react-native-elements'
+import {
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
+import { Card, Button } from 'react-native-elements';
+import Deck from './src/Deck';
 
 const DATA = [
   { id: 1, text: 'Card #1', uri: 'http://imgs.abduzeedo.com/files/paul0v2/unsplash/unsplash-04.jpg' },
@@ -17,47 +20,57 @@ const DATA = [
 ];
 
 class App extends React.Component {
-  renderCard(item){
+  renderCard(item) {
     return (
-      <Card>
-        <Card.Title>{item.text}</Card.Title>
-        <Card.Image source = {require('../Swipe/images/viral.jpg')}  style={{ width: 350, height: 350 }}/>
-        <Text style = {{marginBottom: 10}}>
-          puedo mejorar esto
+      <Card
+        key={item.id}
+        title={item.text}
+        image={{ uri: item.uri }}
+      >
+        <Text style={{ marginBottom: 10 }}>
+          I can customize the Card further.
         </Text>
-       <Button backgroundColor = "#03A9F4" title= "ver ahora" />
+        <Button
+          icon={{ name: 'code' }}
+          backgroundColor="#03A9F4"
+          title="View Now!"
+        />
       </Card>
-    )   
+    );
   }
- 
+
   renderNoMoreCards() {
-    return(
-      <Card>
-        <Card.Title>
-          todo Hecho!
-        </Card.Title>
-        <Text style = {{marginBottom : 10}}>
-          No hay mas contenido!
+    return (
+      <Card title="All Done!">
+        <Text style={{ marginBottom: 10 }}>
+          There's no more content here!
         </Text>
-        <Button backgroundColor = "#03A9F4" title = "Optener mas!"/>
+        <Button
+          backgroundColor="#03A9F4"
+          title="Get more!"
+        />
       </Card>
-    )
+    );
   }
 
   render() {
     return (
       <View style={styles.container}>
-          <Deck data= {DATA} renderCard = {this.renderCard} renderNoMoreCards = {this.renderNoMoreCards}/>
+        <Deck
+          data={DATA}
+          renderCard={this.renderCard}
+          renderNoMoreCards={this.renderNoMoreCards}
+        />
       </View>
     );
-}}
+  }
+}
 
 const styles = StyleSheet.create({
   container: {
+    marginTop: 20,
     flex: 1,
-    backgroundColor: '#fff',
-    
-  },
-});
+    backgroundColor: '#fff'
+  }})
 
 export default App
